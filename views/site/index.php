@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
+use app\components\MenuWidget;
 
 ?>
 <section id="slider"><!--slider-->
@@ -77,6 +78,8 @@
             <div class="col-sm-3">
                 <div class="left-sidebar">
                     <h2>Category</h2>
+
+                    <?= MenuWidget::widget(['tpl' => 'menu'])?>
                     <div class="panel-group category-products" id="accordian"><!--category-productsr-->
                         <div class="panel panel-default">
                             <div class="panel-heading">
