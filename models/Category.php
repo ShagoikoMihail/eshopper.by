@@ -13,7 +13,15 @@ class Category extends ActiveRecord
 		return 'category';
 	}
 
-	public function getProducts() {
+	public function getProducts()
+	{
 		return $this->hasMany(Product::className(), ['category_id', 'id']);
+	}
+
+	public function getCategoryById($id)
+	{
+		$nameCategory = static::findOne($id);
+
+		return $nameCategory;
 	}
 }
