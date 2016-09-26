@@ -27,7 +27,7 @@ class Product extends ActiveRecord
 
 	public function getProductsByIdCategory($id)
 	{
-		$products = static::find()->where(['category_id' => $id])->all();
+		$products = static::find()->where(['category_id' => $id]);
 
 		return $products;
 	}
