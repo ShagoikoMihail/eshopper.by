@@ -20,7 +20,14 @@ class Product extends ActiveRecord
 
 	public function getHitsProduct()
 	{
-		$products = self::find()->where(['hit' => '1'])->limit(6)->all();
+		$products = static::find()->where(['hit' => '1'])->limit(6)->all();
+
+		return $products;
+	}
+
+	public function getProductsByIdCategory($id)
+	{
+		$products = static::find()->where(['category_id' => $id])->all();
 
 		return $products;
 	}
