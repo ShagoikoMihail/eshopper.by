@@ -15,7 +15,7 @@ class Product extends ActiveRecord
 
 	public function getCategory()
 	{
-		return $this->hasOne(Category::className(), ['id', 'category_id']);
+		return $this->hasOne(Category::className(), ['id' => 'category_id']);
 	}
 
 	public function getHitsProduct()
@@ -30,5 +30,10 @@ class Product extends ActiveRecord
 		$products = static::find()->where(['category_id' => $id]);
 
 		return $products;
+	}
+
+	public function getOneProductById($id)
+	{
+		return static::findOne($id);
 	}
 }
