@@ -13,7 +13,15 @@ class Product extends ActiveRecord
 		return 'product';
 	}
 
-	public function getCategory() {
+	public function getCategory()
+	{
 		return $this->hasOne(Category::className(), ['id', 'category_id']);
+	}
+
+	public function getHitsProduct()
+	{
+		$products = self::find()->where(['hit' => '1'])->limit(6)->all();
+
+		return $products;
 	}
 }
