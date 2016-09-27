@@ -21,7 +21,7 @@ class CategoryController extends AppController
 		return $this->render('index', compact('hits'));
 	}
 
-	public function actionView($id)
+	public function actionView()
 	{
 		$product = new Product();
 		$category = new Category();

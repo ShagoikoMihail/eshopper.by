@@ -24,4 +24,5 @@ class Category extends ActiveRecord
 
 		return $nameCategory;
 	}
+
 }

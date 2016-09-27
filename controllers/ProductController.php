@@ -3,9 +3,9 @@
 
 namespace app\controllers;
 
-use app\models\Category;
 use app\models\Product;
 use Yii;
+use yii\data\Pagination;
 use yii\web\HttpException;
 
 class ProductController extends AppController
@@ -22,5 +22,23 @@ class ProductController extends AppController
 		$this->setMeta('E-SHOPPER | ' . $oneProduct->name, $oneProduct->keywords, $oneProduct->description);
 
 		return $this->render('view', compact('oneProduct', 'recomProduct'));
+	}
+
+
+	public function actionSearch()
+	{
+		$product = new Product();
+		$q = trim(Yii::$app->request->get('q'));
+		$this->setMeta('E-SHOPPER | Поиск: ' . $q);
+		if ($q) {
+			$query = $product->search($q);
+			$pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 3, 'forcePageParam' => FALSE, 'pageSizeParam' => FALSE]);
+			$products = $query->offset($pages->offset)->limit($pages->limit)->all();
+
+			return $this->render('search', compact('products', 'pages', 'q'));
+
+		} else {
+			throw new HttpException(400, 'Введите корректный запрос.');
+		}
 	}
 }

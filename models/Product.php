@@ -36,4 +36,9 @@ class Product extends ActiveRecord
 	{
 		return static::findOne($id);
 	}
+
+	public function search($q)
+	{
+		return static::find()->where(['like', 'name', $q]);
+	}
 }
