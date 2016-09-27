@@ -56,7 +56,6 @@ use yii\helpers\Url;
 					<div class="col-sm-5">
 						<div class="view-product">
 							<?= Html::img("@web/images/products/{$oneProduct->img}", ['alt' => $oneProduct->name]) ?>
-							<h3>ZOOM</h3>
 						</div>
 						<div id="similar-product" class="carousel slide" data-ride="carousel">
 
@@ -100,7 +99,7 @@ use yii\helpers\Url;
 								<?= Html::img("@web/images/home/sale.png", ['alt' => 'Распродажа', 'class' => 'newarrival']) ?>
 							<?php endif; ?>
 							<h2><?= $oneProduct->name ?></h2>
-							<p>Web ID: 1089772</p>
+							<p>Web ID: <?= $oneProduct->id ?></p>
 							<img src="/images/product-details/rating.png" alt=""/>
 							<span>
 									<span>US $<?= $oneProduct->price ?></span>
