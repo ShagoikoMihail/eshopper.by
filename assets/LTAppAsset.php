@@ -8,6 +8,7 @@
 namespace app\assets;
 
 use yii\web\AssetBundle;
+use yii\web\View;
 
 /**
  * @author Qiang Xue <qiang.xue@gmail.com>
@@ -19,7 +20,7 @@ class LTAppAsset extends AssetBundle
 	public $baseUrl = '@web';
 	public $jsOptions = [
 		'condition' => 'lte IE9',
-		'position' => \yii\web\View::POS_HEAD,
+		'position' => View::POS_HEAD,
 	];
 	public $js = [
 		'js/html5shiv.js',

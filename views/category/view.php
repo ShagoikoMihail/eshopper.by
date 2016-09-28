@@ -1,6 +1,8 @@
 <?php
 /**
  * @var \app\models\Product $products
+ * @var \app\models\Category $cat
+ * @var \yii\data\Pagination $pages
  */
 
 use app\components\MenuWidget;
@@ -60,9 +62,6 @@ use yii\widgets\LinkPager;
 			<div class="col-sm-9 padding-right">
 				<div class="features_items"><!--features_items-->
 					<h2 class="title text-center"><?=
-						/**
-						 * @var \app\models\Category $cat
-						 */
 						$cat->name ?></h2>
 					<?php if (!empty($products)) { ?>
 						<?php $i = 0;
@@ -73,8 +72,11 @@ use yii\widgets\LinkPager;
 										<div class="productinfo text-center">
 											<?= Html::img("@web/images/products/{$product->img}", ['alt' => $product->name]) ?>
 											<h2>$<?= $product->price ?></h2>
-											<p><a href="<?= Url::to(['product/view', 'id' => $product->id])?>"><?= $product->name ?></a></p>
-											<a href="#" class="btn btn-default add-to-cart"><i
+											<p>
+												<a href="<?= Url::to(['product/view', 'id' => $product->id]) ?>"><?= $product->name ?></a>
+											</p>
+											<a href="<?= Url::to(['cart/add', 'id' => $product->id]) ?>"
+											   data-id="<?= $product->id ?>" class="btn btn-default add-to-cart"><i
 													class="fa fa-shopping-cart"></i>Add
 												to cart</a>
 										</div>
@@ -100,11 +102,7 @@ use yii\widgets\LinkPager;
 							<?php endif; ?>
 						<?php endforeach; ?>
 						<div class="clearfix"></div>
-						<?php
-						/**
-						 * @var \yii\data\Pagination $pages
-						 */
-						echo LinkPager::widget([
+						<?php echo LinkPager::widget([
 							'pagination' => $pages,
 						]);
 						?>

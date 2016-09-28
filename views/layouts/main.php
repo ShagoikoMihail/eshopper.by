@@ -5,6 +5,7 @@
 
 use app\assets\AppAsset;
 use app\assets\LTAppAsset;
+use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -97,7 +98,7 @@ LTAppAsset::register($this);
 								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
 								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="#" onclick="getCart()"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
 							</ul>
 						</div>
@@ -127,7 +128,7 @@ LTAppAsset::register($this);
 										<li><a href="shop.html">Products</a></li>
 										<li><a href="product-details.html">Product Details</a></li>
 										<li><a href="checkout.html">Checkout</a></li>
-										<li><a href="cart.html">Cart</a></li>
+										<li><a href="#" onclick="return getCart()">Cart</a></li>
 										<li><a href="login.html">Login</a></li>
 									</ul>
 								</li>
@@ -144,7 +145,7 @@ LTAppAsset::register($this);
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<form method="get" action="<?=Url::to(['product/search'])?>">
+							<form method="get" action="<?= Url::to(['product/search']) ?>">
 								<input type="text" placeholder="Search" name="q">
 							</form>
 						</div>
@@ -315,6 +316,16 @@ LTAppAsset::register($this);
 		</div>
 
 	</footer><!--/Footer-->
+
+	<?php Modal::begin([
+		'header' => '<h2>Корзина</h2>',
+		'id' => 'cart',
+		'size' => 'modal-lg',
+		'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
+					 <button type="button" class="btn btn-success">Оформить заказ</button>
+					 <button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>',
+	]); ?>
+	<?php Modal::end(); ?>
 
 
 	<?php $this->endBody() ?>

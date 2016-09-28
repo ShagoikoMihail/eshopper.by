@@ -70,8 +70,11 @@ use yii\widgets\LinkPager;
 										<div class="productinfo text-center">
 											<?= Html::img("@web/images/products/{$product->img}", ['alt' => $product->name]) ?>
 											<h2>$<?= $product->price ?></h2>
-											<p><a href="<?= Url::to(['product/view', 'id' => $product->id])?>"><?= $product->name ?></a></p>
-											<a href="#" class="btn btn-default add-to-cart"><i
+											<p>
+												<a href="<?= Url::to(['product/view', 'id' => $product->id]) ?>"><?= $product->name ?></a>
+											</p>
+											<a href="<?= Url::to(['cart/add', 'id' => $product->id]) ?>"
+											   data-id="<?= $product->id ?>" class="btn btn-default add-to-cart"><i
 													class="fa fa-shopping-cart"></i>Add
 												to cart</a>
 										</div>
