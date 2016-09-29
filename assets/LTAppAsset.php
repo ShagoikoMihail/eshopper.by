@@ -16,14 +16,14 @@ use yii\web\View;
  */
 class LTAppAsset extends AssetBundle
 {
-	public $basePath = '@webroot';
-	public $baseUrl = '@web';
-	public $jsOptions = [
-		'condition' => 'lte IE9',
-		'position' => View::POS_HEAD,
-	];
-	public $js = [
-		'js/html5shiv.js',
-		'js/respond.min.js',
-	];
+    public $basePath = '@webroot';
+    public $baseUrl = '@web';
+    public $jsOptions = [
+        'condition' => 'lte IE9',
+        'position' => View::POS_HEAD,
+    ];
+    public $js = [
+        'js/html5shiv.js',
+        'js/respond.min.js',
+    ];
 }

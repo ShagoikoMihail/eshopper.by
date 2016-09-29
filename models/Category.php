@@ -8,20 +8,20 @@ use yii\db\ActiveRecord;
 
 class Category extends ActiveRecord
 {
-	public static function tableName()
-	{
-		return 'category';
-	}
+    public static function tableName()
+    {
+        return 'category';
+    }
 
-	public function getProducts()
-	{
-		return $this->hasMany(Product::className(), ['category_id' => 'id']);
-	}
+    public function getProducts()
+    {
+        return $this->hasMany(Product::className(), ['category_id' => 'id']);
+    }
 
-	public function getCategoryById($id)
-	{
-		$nameCategory = static::findOne($id);
+    public function getCategoryById($id)
+    {
+        $nameCategory = static::findOne($id);
 
-		return $nameCategory;
-	}
+        return $nameCategory;
+    }
 }

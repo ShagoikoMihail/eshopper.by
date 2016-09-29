@@ -3,27 +3,13 @@
 namespace tests\codeception\unit\models;
 
 use app\models\ContactForm;
+use Codeception\Specify;
 use Yii;
 use yii\codeception\TestCase;
-use Codeception\Specify;
 
 class ContactFormTest extends TestCase
 {
     use Specify;
-
-    protected function setUp()
-    {
-        parent::setUp();
-        Yii::$app->mailer->fileTransportCallback = function ($mailer, $message) {
-            return 'testing_message.eml';
-        };
-    }
-
-    protected function tearDown()
-    {
-        unlink($this->getMessageFile());
-        parent::tearDown();
-    }
 
     public function testContact()
     {
@@ -53,6 +39,20 @@ class ContactFormTest extends TestCase
             expect('email should contain subject', $emailMessage)->contains($model->subject);
             expect('email should contain body', $emailMessage)->contains($model->body);
         });
+    }
+
+    protected function setUp()
+    {
+        parent::setUp();
+        Yii::$app->mailer->fileTransportCallback = function ($mailer, $message) {
+            return 'testing_message.eml';
+        };
+    }
+
+    protected function tearDown()
+    {
+        unlink($this->getMessageFile());
+        parent::tearDown();
     }
 
     private function getMessageFile()

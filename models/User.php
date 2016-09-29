@@ -4,12 +4,6 @@ namespace app\models;
 
 class User extends \yii\base\Object implements \yii\web\IdentityInterface
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
-
     private static $users = [
         '100' => [
             'id' => '100',
@@ -26,7 +20,11 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             'accessToken' => '101-token',
         ],
     ];
-
+    public $id;
+    public $username;
+    public $password;
+    public $authKey;
+    public $accessToken;
 
     /**
      * @inheritdoc
