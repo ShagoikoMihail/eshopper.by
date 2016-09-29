@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 use app\models\Cart;
+use app\models\Order;
 use app\models\Product;
 use Yii;
 
@@ -27,9 +28,8 @@ class CartController extends AppController
         if (!Yii::$app->request->isAjax) {
             return $this->redirect(Yii::$app->request->referrer);
         }
-        $this->layout = false;
 
-        return $this->render('cart-modal', compact('session'));
+        return $this->renderAjax('cart-modal', compact('session'));
     }
 
     public function actionClear()
@@ -39,9 +39,8 @@ class CartController extends AppController
         $session->remove('cart');
         $session->remove('cart.qty');
         $session->remove('cart.sum');
-        $this->layout = false;
 
-        return $this->render('cart-modal', compact('session'));
+        return $this->renderAjax('cart-modal', compact('session'));
     }
 
     public function actionDelItem()
@@ -51,22 +50,45 @@ class CartController extends AppController
         $session = Yii::$app->session;
         $session->open();
         $cart->recalc($id);
-        $this->layout = false;
 
-        return $this->render('cart-modal', compact('session'));
+        return $this->renderAjax('cart-modal', compact('session'));
     }
 
     public function actionShow()
     {
         $session = Yii::$app->session;
         $session->open();
-        $this->layout = false;
 
-        return $this->render('cart-modal', compact('session'));
+        return $this->renderAjax('cart-modal', compact('session'));
     }
 
     public function actionView()
     {
-        return $this->render('view');
+        $order = new Order();
+        $session = Yii::$app->session;
+        $session->open();
+        $this->setMeta('Корзина');
+        if ($order->load(Yii::$app->request->post())) {
+            $order->qty = $session['cart.qty'];
+            $order->sum = $session['cart.sum'];
+            if ($order->save()) {
+                $order->saveOrderItems($session['cart'], $order->id);
+                Yii::$app->mailer->compose('order', compact('session'))
+                    ->setFrom(['mixaendminsk@mail.ru' => 'E-SHOPPER'])
+                    ->setTo($order->email)
+                    ->setSubject('Заказ')
+                    ->send();
+                $session->remove('cart');
+                $session->remove('cart.qty');
+                $session->remove('cart.sum');
+                Yii::$app->session->setFlash('success', 'Ваш заказ принят');
+
+                return $this->refresh();
+            } else {
+                Yii::$app->session->setFlash('error', 'Ошибка оформления заказа');
+            }
+        }
+
+        return $this->render('view', compact('session', 'order'));
     }
 }

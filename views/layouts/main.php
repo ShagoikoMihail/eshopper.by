@@ -123,7 +123,7 @@ LTAppAsset::register($this);
                         </div>
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
-                                <li><a href="index.html" class="active">Home</a></li>
+                                <li><a href="<?= Url::home() ?>" class="active">Home</a></li>
                                 <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="shop.html">Products</a></li>
@@ -323,7 +323,7 @@ LTAppAsset::register($this);
         'id' => 'cart',
         'size' => 'modal-lg',
         'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
-					 <a href="' . Url::to('cart/view') . '" class="btn btn-success">Оформить заказ</a>
+					 <a href="' . Url::to('/cart/view') . '" class="btn btn-success">Оформить заказ</a>
 					 <button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>',
     ]); ?>
     <?php Modal::end(); ?>
