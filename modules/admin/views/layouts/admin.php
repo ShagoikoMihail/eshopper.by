@@ -22,7 +22,7 @@ LTAppAsset::register($this);
         <?php $this->head() ?>
         <meta name="description" content="">
         <meta name="author" content="">
-        <title><?= Html::encode($this->title) ?></title>
+        <title>Админка | <?= Html::encode($this->title) ?></title>
         <link rel="shortcut icon" href="@web/favicon.ico">
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
@@ -103,7 +103,7 @@ LTAppAsset::register($this);
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href="#" onclick="getCart()"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                <li><a href="<?= Url::to(['/admin']) ?>"><i class="fa fa-lock"></i> Login</a></li>
+                                <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
                             </ul>
                         </div>
                     </div>
@@ -133,7 +133,7 @@ LTAppAsset::register($this);
                                         <li><a href="product-details.html">Product Details</a></li>
                                         <li><a href="checkout.html">Checkout</a></li>
                                         <li><a href="#" onclick="return getCart()">Cart</a></li>
-                                        <li><a href="<?= Url::to(['/admin']) ?>">Login</a></li>
+                                        <li><a href="login.html">Login</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
