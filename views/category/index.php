@@ -114,7 +114,6 @@ use yii\helpers\Url;
 
                 </div>
             </div>
-            <?= debug(Yii::$app->user->identity) ?>
             <div class="col-sm-9 padding-right">
                 <?php
                 /**
