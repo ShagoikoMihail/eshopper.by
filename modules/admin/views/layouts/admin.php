@@ -66,40 +66,11 @@ LTAppAsset::register($this);
                             <a href="<?= Url::home() ?>"><?= Html::img('@web/images/home/logo.png',
                                     ['alt' => 'E-SHOPPER']) ?></a>
                         </div>
-                        <div class="btn-group pull-right">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle usa"
-                                        data-toggle="dropdown">
-                                    USA
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Canada</a></li>
-                                    <li><a href="#">UK</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle usa"
-                                        data-toggle="dropdown">
-                                    DOLLAR
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Canadian Dollar</a></li>
-                                    <li><a href="#">Pound</a></li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
                                 <?php if (!Yii::$app->user->isGuest): ?>
-                                    <li><a href="<?= Url::to(['/admin/order/create']) ?>"><i class="fa fa-user"></i>
-                                            Создать заказ</a></li>
-                                    <li><a href="<?= Url::to(['/admin/order/index']) ?>"><i class="fa fa-user"></i>Все
-                                            заказы</a></li>
                                     <li><a href="<?= Url::to(['/site/logout']) ?>"><i class="fa fa-user"></i>
                                             Logout(<?= Yii::$app->user->identity['username'] ?>)</a>
                                     </li>
@@ -126,39 +97,44 @@ LTAppAsset::register($this);
                         </div>
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
-                                <li><a href="<?= Url::home() ?>" class="active">Home</a></li>
-                                <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                                <li><a href="<?= Url::to(['/admin']) ?>" class="active">Home</a></li>
+                                <li class="dropdown"><a href="#">Категории<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">Products</a></li>
-                                        <li><a href="product-details.html">Product Details</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="#" onclick="return getCart()">Cart</a></li>
-                                        <li><a href="login.html">Login</a></li>
+                                        <li><a href="<?= Url::to(['category/index']) ?>">Список
+                                                категорий</a></li>
+                                        <li><a href="<?= Url::to(['category/create']) ?>">Добавить
+                                                категорию</a></li>
                                     </ul>
                                 </li>
-                                <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                                <li class="dropdown"><a href="#">Товары<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">Blog List</a></li>
-                                        <li><a href="blog-single.html">Blog Single</a></li>
+                                        <li><a href="<?= \yii\helpers\Url::to(['product/index']) ?>">Список товаров</a>
+                                        </li>
                                     </ul>
                                 </li>
-                                <li><a href="404.html">404</a></li>
-                                <li><a href="contact-us.html">Contact</a></li>
                             </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="search_box pull-right">
-                            <form method="get" action="<?= Url::to(['product/search']) ?>">
-                                <input type="text" placeholder="Search" name="q">
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div><!--/header-bottom-->
     </header><!--/header-->
     <div class="container">
+        <?php if (Yii::$app->session->hasFlash('success')): ?>
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <?php echo Yii::$app->session->getFlash('success'); ?>
+            </div>
+        <?php endif; ?>
+        <?php if (Yii::$app->session->hasFlash('error')): ?>
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <?php echo Yii::$app->session->getFlash('error'); ?>
+            </div>
+        <?php endif; ?>
         <?= $content ?>
     </div>
 

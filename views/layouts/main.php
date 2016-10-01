@@ -96,14 +96,14 @@ LTAppAsset::register($this);
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                <li><a href="#" onclick="getCart()"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                <?php if (!Yii::$app->user->isGuest): ?>
+                                <?php if (!Yii::$app->user->isGuest) : ?>
+                                    <li><a href="<?= Url::to(['/admin']) ?>"><i class="fa fa-user"></i>
+                                            Admin Panel</a>
+                                    </li>
                                     <li><a href="<?= Url::to(['/site/logout']) ?>"><i class="fa fa-user"></i>
                                             Logout(<?= Yii::$app->user->identity['username'] ?>)</a>
                                     </li>
-                                <?php else: ?>
+                                <?php else : ?>
                                     <li><a href="<?= Url::to(['/admin']) ?>"><i class="fa fa-lock"></i> Login</a></li>
                                 <?php endif; ?>
                             </ul>

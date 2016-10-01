@@ -2,16 +2,16 @@
 
 namespace app\modules\admin\controllers;
 
-use app\modules\admin\models\Order;
+use app\modules\admin\models\Category;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 
 /**
- * OrderController implements the CRUD actions for Order model.
+ * CategoryController implements the CRUD actions for Category model.
  */
-class OrderController extends AppAdminController
+class CategoryController extends AppAdminController
 {
     /**
      * @inheritdoc
@@ -29,20 +29,15 @@ class OrderController extends AppAdminController
     }
 
     /**
-     * Lists all Order models.
+     * Lists all Category models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Order::find(),
+            'query' => Category::find()->with('category'),
             'pagination' => [
-                'pageSize' => 3,
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'status' => SORT_ASC,
-                ],
+                'pageSize' => 10,
             ],
         ]);
 
@@ -52,7 +47,7 @@ class OrderController extends AppAdminController
     }
 
     /**
-     * Displays a single Order model.
+     * Displays a single Category model.
      * @param integer $id
      * @return mixed
      */
@@ -64,15 +59,15 @@ class OrderController extends AppAdminController
     }
 
     /**
-     * Finds the Order model based on its primary key value.
+     * Finds the Category model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Order the loaded model
+     * @return Category the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Order::findOne($id)) !== null) {
+        if (($model = Category::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -80,15 +75,17 @@ class OrderController extends AppAdminController
     }
 
     /**
-     * Creates a new Order model.
+     * Creates a new Category model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Order();
+        $model = new Category();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Категория создана');
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -98,7 +95,7 @@ class OrderController extends AppAdminController
     }
 
     /**
-     * Updates an existing Order model.
+     * Updates an existing Category model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -117,7 +114,7 @@ class OrderController extends AppAdminController
     }
 
     /**
-     * Deletes an existing Order model.
+     * Deletes an existing Category model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
