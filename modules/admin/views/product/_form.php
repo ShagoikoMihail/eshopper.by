@@ -2,11 +2,9 @@
 
 use app\components\MenuWidget;
 use mihaildev\ckeditor\CKEditor;
-use mihaildev\elfinder\ElFinder;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-mihaildev\elfinder\Assets::noConflict($this);
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Product */
@@ -15,7 +13,7 @@ mihaildev\elfinder\Assets::noConflict($this);
 
 <div class="product-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?php //echo $form->field($model, 'category_id')->textInput() ?>
     <div class="form-group field-category-parent_id">
@@ -44,7 +42,9 @@ mihaildev\elfinder\Assets::noConflict($this);
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'img')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'image')->fileInput() ?>
+
+    <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
     <?= $form->field($model, 'hit')->checkbox(['0', '1',]) ?>
 
