@@ -104,6 +104,7 @@ LTAppAsset::register($this);
                                             Logout(<?= Yii::$app->user->identity['username'] ?>)</a>
                                     </li>
                                 <?php else : ?>
+                                    <li><a href="<?= Url::to(['cart/view']) ?>"><i class="fa fa-lock"></i> Cart</a></li>
                                     <li><a href="<?= Url::to(['/admin']) ?>"><i class="fa fa-lock"></i> Login</a></li>
                                 <?php endif; ?>
                             </ul>

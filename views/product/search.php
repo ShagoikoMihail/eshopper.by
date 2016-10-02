@@ -64,11 +64,12 @@ use yii\widgets\LinkPager;
                     <?php if (!empty($products)) { ?>
                         <?php $i = 0;
                         foreach ($products as $product): ?>
+                            <?php $mainImage = $product->getImage() ?>
                             <div class="col-sm-4">
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <?= Html::img("@web/images/products/{$product->img}",
+                                            <?= Html::img($mainImage->getUrl('268x249'),
                                                 ['alt' => $product->name]) ?>
                                             <h2>$<?= $product->price ?></h2>
                                             <p>

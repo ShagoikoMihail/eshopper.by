@@ -51,34 +51,32 @@ use yii\helpers\Url;
                 </div>
             </div>
 
+            <?php $mainImg = $oneProduct->getImage(); ?>
+            <?php $gallery = $oneProduct->getImages(); ?>
+
             <div class="col-sm-9 padding-right">
                 <div class="product-details"><!--product-details-->
                     <div class="col-sm-5">
                         <div class="view-product">
-                            <?= Html::img("@web/images/products/{$oneProduct->img}", ['alt' => $oneProduct->name]) ?>
+                            <?= Html::img($mainImg->getUrl(), ['alt' => $oneProduct->name]) ?>
                         </div>
                         <div id="similar-product" class="carousel slide" data-ride="carousel">
 
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
-                                <div class="item active">
-                                    <a href=""><img src="/images/product-details/similar1.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar2.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar3.jpg" alt=""></a>
-                                </div>
-                                <div class="item">
-                                    <a href=""><img src="/images/product-details/similar1.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar2.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar3.jpg" alt=""></a>
-                                </div>
-                                <div class="item">
-                                    <a href=""><img src="/images/product-details/similar1.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar2.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar3.jpg" alt=""></a>
-                                </div>
-
+                                <?php $count = count($gallery);
+                                $i = 0;
+                                foreach ($gallery as $img) : ?>
+                                    <?php if ($i % 3 == 0): ?>
+                                        <div class="item <?php if ($i == 0) echo ' active' ?>">
+                                    <?php endif; ?>
+                                    <a href=""><?= Html::img($img->getUrl('85x84'), ['alt' => '']) ?></a>
+                                    <?php $i++;
+                                    if ($i % 3 == 0 || $i == $count): ?>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
                             </div>
-
                             <!-- Controls -->
                             <a class="left item-control" href="#similar-product" data-slide="prev">
                                 <i class="fa fa-angle-left"></i>
