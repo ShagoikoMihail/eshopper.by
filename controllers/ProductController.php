@@ -3,6 +3,7 @@
 
 namespace app\controllers;
 
+use app\models\Comments;
 use app\models\Product;
 use Yii;
 use yii\data\Pagination;
@@ -13,7 +14,9 @@ class ProductController extends AppController
     public function actionView()
     {
         $product = new Product();
+        $comments = new Comments();
         $id = Yii::$app->request->get('id');
+        $prodComms = $comments->getCommentsByIdProduct($id);
         $oneProduct = $product->getOneProductById($id);
         if ($oneProduct === null) {
             throw new HttpException(404, 'Данного товара не существует.');
@@ -21,7 +24,7 @@ class ProductController extends AppController
         $recomProduct = $product->getHitsProduct();
         $this->setMeta('E-SHOPPER | ' . $oneProduct->name, $oneProduct->keywords, $oneProduct->description);
 
-        return $this->render('view', compact('oneProduct', 'recomProduct'));
+        return $this->render('view', compact('oneProduct', 'recomProduct', 'prodComms'));
     }
 
 

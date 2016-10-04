@@ -27,6 +27,11 @@ class Product extends ActiveRecord
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
+    public function getComments()
+    {
+        return $this->hasMany(Comments::className(), ['product_id' => 'id']);
+    }
+
     public function getHitsProduct()
     {
         $products = static::find()->where(['hit' => '1'])->limit(6)->all();
